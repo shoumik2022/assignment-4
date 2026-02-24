@@ -20,3 +20,53 @@ function updateCounts() {
         noJobsAvailable.style.display = "none";
     }
 }
+function filterJobs(type) {
+    currentFilter = type;
+    const jobCards = document.querySelectorAll(".job-card");
+    jobCards.forEach(card => {
+        const status = card.querySelector(".applied-btn").innerText;
+        if (type === "all") {
+            card.style.display = "block";
+        }
+        else if (type === "interview") {
+            card.style.display = status === "INTERVIEW" ? "block" : "none";
+        }
+        else if (type === "rejected") {
+            card.style.display = status === "REJECTED" ? "block" : "none";
+        }
+    });
+  [allBtn, interviewBtn, rejectedBtn].forEach(btn => {
+        btn.classList.remove("btn-active");
+    });
+    if (type === "all") allBtn.classList.add("btn-active");
+    if (type === "interview") interviewBtn.classList.add("btn-active");
+    if (type === "rejected") rejectedBtn.classList.add("btn-active");
+}
+document.querySelectorAll(".interview-btn").forEach(button => {
+    button.addEventListener("click", function () {
+        const card = button.closest(".job-card");
+        const statusBtn = card.querySelector(".applied-btn");
+        if (statusBtn.innerText === "NOT APPLIED") {
+            statusBtn.innerText = "INTERVIEW";
+            statusBtn.classList.remove("bg-[#EEF4FF]", "text-[#002C5C]");
+            statusBtn.classList.add("bg-green-100", "text-green-600");
+            interview++;
+            interviewCount.innerText = interview;
+            filterJobs(currentFilter);
+        }
+    });
+});
+document.querySelectorAll(".reject-btn").forEach(button => {
+    button.addEventListener("click", function () {
+        const card = button.closest(".job-card");
+        const statusBtn = card.querySelector(".applied-btn");
+        if (statusBtn.innerText === "NOT APPLIED") {
+            statusBtn.innerText = "REJECTED";
+            statusBtn.classList.remove("bg-[#EEF4FF]", "text-[#002C5C]");
+            statusBtn.classList.add("bg-red-100", "text-red-600");
+            rejected++;
+            rejectedCount.innerText = rejected;
+            filterJobs(currentFilter);
+        }
+    });
+});
