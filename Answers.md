@@ -21,4 +21,4 @@
 
 ### 5. What is the difference between preventDefault() and stopPropagation() methods?
 
-### 5.Answer: eventPreventDefault() stops a browsers default work in the other hand  eventStopPropagation() ends the travel of dom up to down.
+### 5.Answer: eventPreventDefault() stops a browsers default work in the other hand  eventStopPropagation() ends the travel of dom from up to down.
