@@ -70,3 +70,41 @@ document.querySelectorAll(".reject-btn").forEach(button => {
         }
     });
 });
+document.querySelectorAll(".delete-btn").forEach(button => {
+    button.addEventListener("click", function () {
+        const card = button.closest(".job-card");
+        card.remove();
+        updateCounts();
+        filterJobs(currentFilter);
+    });
+});
+allBtn.addEventListener("click", () => filterJobs("all"));
+interviewBtn.addEventListener("click", () => filterJobs("interview"));
+rejectedBtn.addEventListener("click", () => filterJobs("rejected"));
+function filterJobs(type) {
+    currentFilter = type;
+    const jobCards = document.querySelectorAll(".job-card");
+    let visibleCount = 0;
+    jobCards.forEach(card => {
+        const status = card.querySelector(".applied-btn").innerText;
+        if (type === "all") {
+            card.style.display = "block";
+            visibleCount++;
+        }
+        else if (type === "interview") {
+            if (status === "INTERVIEW") {
+                card.style.display = "block";
+                visibleCount++;
+            } else {
+                card.style.display = "none";
+            }
+        }
+        else if (type === "rejected") {
+            if (status === "REJECTED") {
+                card.style.display = "block";
+                visibleCount++;
+            } else {
+                card.style.display = "none";
+            }
+        }
+    });
