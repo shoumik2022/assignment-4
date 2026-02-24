@@ -108,3 +108,19 @@ function filterJobs(type) {
             }
         }
     });
+    jobLabel.innerText = visibleCount + " jobs";
+    if (visibleCount === 0) {
+        noJobsAvailable.style.display = "block";
+    } else {
+        noJobsAvailable.style.display = "none";
+    }
+    [allBtn, interviewBtn, rejectedBtn].forEach(btn => {
+        btn.classList.remove("btn-active");
+    });
+
+    if (type === "all") allBtn.classList.add("btn-active");
+    if (type === "interview") interviewBtn.classList.add("btn-active");
+    if (type === "rejected") rejectedBtn.classList.add("btn-active");
+}
+updateCounts();
+filterJobs("all");
